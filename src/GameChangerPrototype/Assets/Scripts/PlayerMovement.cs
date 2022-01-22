@@ -19,16 +19,18 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void Update() {
-
-        KeyCode value;
-        if (controlManager.keyMap[id].TryGetValue("stop", out value)) {
-            if (Input.GetKey(value)) {
+        Dictionary<string, KeyCode> playerKeys = controlManager.keyMap[id];
+        if (playerKeys.ContainsKey("stop")) {
+            if (Input.GetKey(playerKeys["stop"])) {
                 stopper = 0;
             }
-            else {
+
+            if (Input.GetKeyUp(playerKeys["stop"])) {
                 stopper = 1;
+                KeyCode key = controlManager.UpdateKey(id, "stop");
+                Debug.Log(key);
             }
-        }   
+        }
 
         body.position += new Vector2(moveSpeed * direction, 0) * Time.deltaTime * stopper;
     }

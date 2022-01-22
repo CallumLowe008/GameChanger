@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class ControlManager : MonoBehaviour
@@ -33,5 +34,19 @@ public class ControlManager : MonoBehaviour
         }
 
         return keys;
+    }
+
+    public KeyCode UpdateKey(int id, string keyName) {
+        string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        KeyCode key = new KeyCode();
+        System.Random rand = new System.Random();
+        do {
+            int index = rand.Next(0, chars.Length);
+            key = (KeyCode)System.Enum.Parse(typeof(KeyCode), chars[index].ToString());
+        }
+        while (GetKeysInUse().Contains(key));
+
+        keyMap[id][keyName] = key;
+        return key;
     }
 }
