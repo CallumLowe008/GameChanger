@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Start() {
         direction = 1;
+        stopper = 1;
     }
 
     void Update() {

@@ -11,17 +11,13 @@ public class ControlManager : MonoBehaviour
     };
 
     void Start() {
-        keyMap[0].Add("up", KeyCode.W);
-        keyMap[0].Add("right", KeyCode.A);
-        keyMap[0].Add("left", KeyCode.S);
-        keyMap[0].Add("down", KeyCode.D);
-        keyMap[0].Add("stop", KeyCode.LeftShift);
+        keyMap[0].Add("right", KeyCode.D);
+        keyMap[0].Add("left", KeyCode.A);
+        keyMap[0].Add("stop", KeyCode.S);
 
-        keyMap[1].Add("up", KeyCode.UpArrow);
         keyMap[1].Add("right", KeyCode.RightArrow);
         keyMap[1].Add("left", KeyCode.LeftArrow);
-        keyMap[1].Add("down", KeyCode.DownArrow);
-        keyMap[1].Add("stop", KeyCode.RightControl);
+        keyMap[1].Add("stop", KeyCode.DownArrow);
     }
 
     public List<KeyCode> GetKeysInUse() {
