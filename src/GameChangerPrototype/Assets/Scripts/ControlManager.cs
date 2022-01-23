@@ -33,6 +33,8 @@ public class ControlManager : MonoBehaviour
     }
 
     public KeyCode UpdateKey(int id, string keyName) {
+        return KeyCode.None;
+
         string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         KeyCode key = new KeyCode();
         System.Random rand = new System.Random();
@@ -43,6 +45,7 @@ public class ControlManager : MonoBehaviour
         while (GetKeysInUse().Contains(key));
 
         keyMap[id][keyName] = key;
+        Debug.Log(keyName + ": " + key);
         return key;
     }
 }

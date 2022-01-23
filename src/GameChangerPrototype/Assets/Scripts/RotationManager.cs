@@ -4,22 +4,17 @@ using UnityEngine;
 
 public class RotationManager : MonoBehaviour
 {
-    // Respond To Input X
-    // Stop Player
-    // Rotate Level X
-    // Restart Player
-    // Update Input
-
     [Header("References")]
     public ControlManager controlManager;
     public GameObject level;
     public int id;
+    public Transform player;
 
     [Header("Rotation")]
-    public int angleIndex;
+    private int angleIndex;
     private int targetAngle;
+    private float rotationDirection;
     public float rotationSpeed;
-    public float rotationDirection;
     public float minBuffer;
     public bool isRotating;
 
@@ -38,12 +33,17 @@ public class RotationManager : MonoBehaviour
                 angleIndex -= 1;
                 rotationDirection = -1;
                 isRotating = true;
+
+                controlManager.UpdateKey(id, "right");
             }
             if (Input.GetKeyDown(keys["left"])) {
                 angleIndex += 1;
                 rotationDirection = 1;
                 isRotating = true;
+
+                controlManager.UpdateKey(id, "left");
             }
+            CenterLevelObject();
             targetAngle = angleIndex * 90;
         }
 
@@ -66,6 +66,22 @@ public class RotationManager : MonoBehaviour
                 targetAngle -= 360;
                 angleIndex -= 4;
             }
+        }
+    }
+
+    void CenterLevelObject() {
+        List<Transform> children = new List<Transform>();
+        for (int i = 0; i < level.transform.childCount; i += 1) {
+            Transform child = level.transform.GetChild(i);
+            children.Add(child);
+        }
+
+        level.transform.DetachChildren();
+
+        level.transform.position = player.position;
+
+        foreach (Transform child in children) {
+            child.SetParent(level.transform);
         }
     }
 }
