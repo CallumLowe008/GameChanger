@@ -21,7 +21,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void Update() {
-        if (rotationManager.isRotating == true) {
+        if (rotationManager.isRotating == true) { // Stops player compeltely while level is rotating
             stopper = 0;
             body.gravityScale = 0;
         }
@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
             body.gravityScale = 1;
         }
 
-        Dictionary<string, KeyCode> playerKeys = controlManager.keyMap[id];
+        Dictionary<string, KeyCode> playerKeys = controlManager.keyMap[id]; // Fetches input keys from ControlManager
         if (playerKeys.ContainsKey("stop")) {
             if (Input.GetKey(playerKeys["stop"])) {
                 stopper = 0;

@@ -35,6 +35,7 @@ public class RotationManager : MonoBehaviour
                 isRotating = true;
 
                 controlManager.UpdateKey(id, "right");
+                SetRotationCenter(); // Moves the rotation center to the player
             }
             if (Input.GetKeyDown(keys["left"])) {
                 angleIndex += 1;
@@ -42,8 +43,8 @@ public class RotationManager : MonoBehaviour
                 isRotating = true;
 
                 controlManager.UpdateKey(id, "left");
+                SetRotationCenter();
             }
-            CenterLevelObject();
             targetAngle = angleIndex * 90;
         }
 
@@ -58,7 +59,7 @@ public class RotationManager : MonoBehaviour
                 isRotating = false;
             }
 
-            if (targetAngle < 0) {
+            if (targetAngle < 0) { // Makes sure that the direction is correct
                 targetAngle += 360;
                 angleIndex  += 4;
             }
@@ -69,8 +70,8 @@ public class RotationManager : MonoBehaviour
         }
     }
 
-    void CenterLevelObject() {
-        List<Transform> children = new List<Transform>();
+    void SetRotationCenter() {
+        List<Transform> children = new List<Transform>(); // Detaches children before setting position
         for (int i = 0; i < level.transform.childCount; i += 1) {
             Transform child = level.transform.GetChild(i);
             children.Add(child);

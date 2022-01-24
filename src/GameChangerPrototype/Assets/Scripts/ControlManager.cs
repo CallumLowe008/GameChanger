@@ -11,6 +11,7 @@ public class ControlManager : MonoBehaviour
     };
 
     void Start() {
+        // Initial Keys
         keyMap[0].Add("right", KeyCode.D);
         keyMap[0].Add("left", KeyCode.A);
         keyMap[0].Add("stop", KeyCode.S);
@@ -37,15 +38,15 @@ public class ControlManager : MonoBehaviour
 
         string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         KeyCode key = new KeyCode();
-        System.Random rand = new System.Random();
+        System.Random rand = new System.Random(); // Creates random generator
         do {
-            int index = rand.Next(0, chars.Length);
-            key = (KeyCode)System.Enum.Parse(typeof(KeyCode), chars[index].ToString());
+            int index = rand.Next(0, chars.Length); // Random.Next() generates a random number between the two arguments
+            key = (KeyCode)System.Enum.Parse(typeof(KeyCode), chars[index].ToString()); // Converts char to string, and string to KeyCode
         }
-        while (GetKeysInUse().Contains(key));
+        while (GetKeysInUse().Contains(key)); // Generates a random key repeatedly until it lands on one that is currently not in use
 
-        keyMap[id][keyName] = key;
-        Debug.Log(keyName + ": " + key);
+        keyMap[id][keyName] = key; // Updates key dict
+        Debug.Log(keyName + ": " + key); // Displays new key in console. Temporary
         return key;
     }
 }

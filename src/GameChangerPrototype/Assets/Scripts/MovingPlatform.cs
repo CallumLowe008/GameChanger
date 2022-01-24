@@ -17,6 +17,7 @@ public class MovingPlatform : MonoBehaviour
     private int iterDirection;
 
     void OnDrawGizmosSelected() {
+        // Draws gizmo path when platform object is selected
         Gizmos.color = Color.magenta;
         for (var i = 0; i < movementPoints.Length-1; i += 1) {
             Gizmos.DrawLine(movementPoints[i], movementPoints[i+1]);
@@ -37,19 +38,18 @@ public class MovingPlatform : MonoBehaviour
         if (movementComplete == false) {
             if (isMoving) {
                 Vector3 positionDifference = movementPoints[targetIndex] - transform.position;
-                Vector3 moveDirection = positionDifference.normalized;
-                transform.position += moveDirection * movementSpeed * Time.deltaTime;
+                transform.position += positionDifference.noramlized * movementSpeed * Time.deltaTime;
 
                 if (positionDifference.magnitude < lockDistance) {
-                    transform.position = movementPoints[targetIndex];
+                    transform.position = movementPoints[targetIndex]; // Locks to the target position when it is close enough
                     targetIndex += iterDirection;
                     if (targetIndex < 0 || targetIndex >= movementPoints.Length) {
                         targetIndex -= iterDirection;
                         if (doesLoop) {
-                            iterDirection = -iterDirection;
+                            iterDirection = -iterDirection; // Reverses the direction of the array iteration
                         }
                         else {
-                            movementComplete = true;
+                            movementComplete = true; // If 'doesLoop' is false, disable platform movement
                         }
                     }
                     
@@ -57,7 +57,7 @@ public class MovingPlatform : MonoBehaviour
                 }
             }
             else {
-                stopAlarm += Time.deltaTime;
+                stopAlarm += Time.deltaTime; // Alarm dependent on the 'stopLength' property
                 if (stopAlarm >= stopLength) {
                     stopAlarm = 0;
                     isMoving = true;
