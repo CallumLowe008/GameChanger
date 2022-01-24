@@ -38,7 +38,7 @@ public class MovingPlatform : MonoBehaviour
         if (movementComplete == false) {
             if (isMoving) {
                 Vector3 positionDifference = movementPoints[targetIndex] - transform.position;
-                transform.position += positionDifference.noramlized * movementSpeed * Time.deltaTime;
+                transform.position += positionDifference.normalized * movementSpeed * Time.deltaTime;
 
                 if (positionDifference.magnitude < lockDistance) {
                     transform.position = movementPoints[targetIndex]; // Locks to the target position when it is close enough
