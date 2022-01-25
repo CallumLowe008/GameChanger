@@ -21,7 +21,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void Update() {
-        if (rotationManager.isRotating == true) { // Stops player compeltely while level is rotating
+        if (rotationManager.state == RotationManager.RotationState.rotating) { // Stops player compeltely while level is rotating
             stopper = 0;
             body.gravityScale = 0;
         }

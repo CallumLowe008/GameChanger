@@ -400,8 +400,9 @@ MonoBehaviour:
   player: {fileID: 800862174}
   cam: {fileID: 519420032}
   rotationSpeed: 150
-  minBuffer: 1
-  isRotating: 0
+  lockDistance: 1
+  cooldownLength: 1
+  state: 0
 --- !u!4 &612487337
 Transform:
   m_ObjectHideFlags: 0

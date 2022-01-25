@@ -12,15 +12,24 @@ public class RotationManager : MonoBehaviour
     public Transform cam;
 
     [Header("Rotation")]
-    private int angleIndex;
-    private int targetAngle;
-    private int rotationDirection;
     public float rotationSpeed;
-    public float minBuffer;
-    public bool isRotating;
+    public float lockDistance;
+
+    public float cooldownLength;
+    private float cooldownAlarm;
+
+    private int angleIndex;
+    private int rotationDirection;
+
+    public enum RotationState {
+        stationary,
+        rotating,
+        cooldown
+    }
+    public RotationState state;
 
     void Start() {
-        isRotating = false;
+        state = RotationState.stationary;
         rotationDirection = 1;
     }
 
@@ -29,7 +38,7 @@ public class RotationManager : MonoBehaviour
         float currentAngle = level.eulerAngles.z;
 
         // Respond To Input
-        if (isRotating == false) {
+        if (state == RotationState.stationary) {
             string keyPressed = "";
             if (Input.GetKeyDown(keys["right"])) {
                 rotationDirection = -1;
@@ -43,24 +52,22 @@ public class RotationManager : MonoBehaviour
 
             if (keyPressed != "") {
                 angleIndex += rotationDirection;
-                targetAngle = angleIndex * 90;
 
                 controlManager.UpdateKey(id, keyPressed); // Randomises the pressed key
                 SetRotationCenter(); // Moves the rotation center to the player
 
-                isRotating = true;
+                state = RotationState.rotating;
             }
         }
-
-        // Rotate Level
-        if (isRotating == true) {
+        else if (state == RotationState.rotating) {
+            float targetAngle = angleIndex * 90;
             float diff = targetAngle - currentAngle;
 
             level.eulerAngles += new Vector3(0, 0, rotationSpeed) * rotationDirection * Time.deltaTime;
 
-            if (Mathf.Abs(diff) < minBuffer) {
+            if (Mathf.Abs(diff) < lockDistance) {
                 level.eulerAngles = new Vector3(0, 0, targetAngle);
-                isRotating = false;
+                state = RotationState.cooldown;
                 
                 ResetPosition(); // Stops the level drifting off (which it does due to rotating around the player, meaning it moves down and right constantly)
             }
@@ -72,6 +79,13 @@ public class RotationManager : MonoBehaviour
             else if (targetAngle >= 360) {
                 targetAngle -= 360;
                 angleIndex -= 4;
+            }
+        }
+        else if (state == RotationState.cooldown) {
+            cooldownAlarm += Time.deltaTime;
+            if (cooldownAlarm >= cooldownLength) {
+                cooldownAlarm = 0;
+                state = RotationState.stationary;
             }
         }
     }
