@@ -6,9 +6,10 @@ public class RotationManager : MonoBehaviour
 {
     [Header("References")]
     public ControlManager controlManager;
-    public GameObject level;
     public int id;
+    public Transform level;
     public Transform player;
+    public Transform cam;
 
     [Header("Rotation")]
     private int angleIndex;
@@ -25,7 +26,7 @@ public class RotationManager : MonoBehaviour
 
     void Update() {
         Dictionary<string, KeyCode> keys = controlManager.keyMap[id];
-        float currentAngle = level.transform.eulerAngles.z;
+        float currentAngle = level.eulerAngles.z;
 
         // Respond To Input
         if (isRotating == false) {
@@ -55,18 +56,20 @@ public class RotationManager : MonoBehaviour
         if (isRotating == true) {
             float diff = targetAngle - currentAngle;
 
-            level.transform.eulerAngles += new Vector3(0, 0, rotationSpeed) * rotationDirection * Time.deltaTime;
+            level.eulerAngles += new Vector3(0, 0, rotationSpeed) * rotationDirection * Time.deltaTime;
 
             if (Mathf.Abs(diff) < minBuffer) {
-                level.transform.eulerAngles = new Vector3(0, 0, targetAngle);
+                level.eulerAngles = new Vector3(0, 0, targetAngle);
                 isRotating = false;
+                
+                ResetPosition(); // Stops the level drifting off (which it does due to rotating around the player, meaning it moves down and right constantly)
             }
 
             if (targetAngle < 0) { // Makes sure that the direction is correct
                 targetAngle += 360;
                 angleIndex  += 4;
             }
-            else if (targetAngle > 360) {
+            else if (targetAngle >= 360) {
                 targetAngle -= 360;
                 angleIndex -= 4;
             }
@@ -75,17 +78,23 @@ public class RotationManager : MonoBehaviour
 
     void SetRotationCenter() {
         List<Transform> children = new List<Transform>(); // Detaches children before setting position
-        for (int i = 0; i < level.transform.childCount; i += 1) {
-            Transform child = level.transform.GetChild(i);
+        for (int i = 0; i < level.childCount; i += 1) {
+            Transform child = level.GetChild(i);
             children.Add(child);
         }
 
-        level.transform.DetachChildren();
+        level.DetachChildren();
 
-        level.transform.position = player.position;
+        level.position = player.position;
 
         foreach (Transform child in children) {
-            child.SetParent(level.transform);
+            child.SetParent(level);
         }
+    }
+
+    void ResetPosition() {
+        level.position -= player.position;
+        cam.position -= player.position;
+        player.position -= player.position;
     }
 }

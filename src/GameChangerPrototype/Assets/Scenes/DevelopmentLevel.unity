@@ -395,11 +395,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controlManager: {fileID: 1734556688}
-  level: {fileID: 1672646354}
   id: 0
+  level: {fileID: 1672646355}
   player: {fileID: 800862174}
+  cam: {fileID: 519420032}
   rotationSpeed: 150
-  minBuffer: 0.5
+  minBuffer: 1
   isRotating: 0
 --- !u!4 &612487337
 Transform:
