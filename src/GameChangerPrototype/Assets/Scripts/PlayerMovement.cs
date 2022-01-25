@@ -8,7 +8,6 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody2D body;
     public ControlManager controlManager;
     public RotationManager rotationManager;
-    public int id;
 
     [Header("Movement")]
     public float moveSpeed;
@@ -30,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
             body.gravityScale = 1;
         }
 
-        Dictionary<string, KeyCode> playerKeys = controlManager.keyMap[id]; // Fetches input keys from ControlManager
+        Dictionary<string, KeyCode> playerKeys = controlManager.controlKeys; // Fetches input keys from ControlManager
         if (playerKeys.ContainsKey("stop")) {
             if (Input.GetKey(playerKeys["stop"])) {
                 stopper = 0;
@@ -38,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
 
             if (Input.GetKeyUp(playerKeys["stop"])) {
                 stopper = 1;
-                controlManager.UpdateKey(id, "stop");
+                controlManager.UpdateKey("stop");
             }
         }
 

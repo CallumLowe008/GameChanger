@@ -5,38 +5,41 @@ using UnityEngine;
 
 public class ControlManager : MonoBehaviour
 {
-    public Dictionary<string, KeyCode>[] keyMap = new Dictionary<string, KeyCode>[] {
-        new Dictionary<string, KeyCode>(),
-        new Dictionary<string, KeyCode>()
-    };
+    public Sprite[] keyIcons;
+    private string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+    public Dictionary<string, KeyCode> controlKeys = new Dictionary<string, KeyCode>();
+    public Dictionary<string, SpriteRenderer> keyVisuals = new Dictionary<string, SpriteRenderer>();
+
+    [Header("Temporary Key References")]
+    public SpriteRenderer rightKey;
+    public SpriteRenderer leftKey;
+    public SpriteRenderer stopKey;
 
     void Start() {
         // Initial Keys
-        keyMap[0].Add("right", KeyCode.D);
-        keyMap[0].Add("left", KeyCode.A);
-        keyMap[0].Add("stop", KeyCode.S);
+        controlKeys.Add("right", KeyCode.D);
+        controlKeys.Add("left", KeyCode.A);
+        controlKeys.Add("stop", KeyCode.S);
 
-        keyMap[1].Add("right", KeyCode.RightArrow);
-        keyMap[1].Add("left", KeyCode.LeftArrow);
-        keyMap[1].Add("stop", KeyCode.DownArrow);
+        keyVisuals.Add("right", rightKey);
+        keyVisuals.Add("left", leftKey);
+        keyVisuals.Add("stop", stopKey);
+
+        UpdateKeyVisual("right", controlKeys["right"].ToString());
+        UpdateKeyVisual("left", controlKeys["left"].ToString());
+        UpdateKeyVisual("stop", controlKeys["stop"].ToString());
     }
 
     public List<KeyCode> GetKeysInUse() {
         List<KeyCode> keys = new List<KeyCode>();
-
-        foreach (Dictionary<string, KeyCode> player in keyMap) {
-            foreach (KeyCode key in player.Values) {
-                keys.Add(key);
-            }
+        foreach (KeyCode key in controlKeys.Values) {
+            keys.Add(key);
         }
-
         return keys;
     }
 
-    public KeyCode UpdateKey(int id, string keyName) {
-        return KeyCode.None;
-
-        string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    public KeyCode UpdateKey(string keyName) {
         KeyCode key = new KeyCode();
         System.Random rand = new System.Random(); // Creates random generator
         do {
@@ -45,8 +48,17 @@ public class ControlManager : MonoBehaviour
         }
         while (GetKeysInUse().Contains(key)); // Generates a random key repeatedly until it lands on one that is currently not in use
 
-        keyMap[id][keyName] = key; // Updates key dict
-        Debug.Log(keyName + ": " + key); // Displays new key in console. Temporary
+        controlKeys[keyName] = key; // Updates key dict
+        UpdateKeyVisual(keyName, key.ToString());
         return key;
+    }
+
+    private void UpdateKeyVisual(string keyName, string keyValue) {
+        if (keyValue != "") {
+            keyVisuals[keyName].sprite = keyIcons[chars.IndexOf(keyValue)];
+        }
+        else {
+            Debug.Log("Key not generated properly");
+        }
     }
 }

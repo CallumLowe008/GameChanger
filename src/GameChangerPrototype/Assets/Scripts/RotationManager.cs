@@ -6,7 +6,6 @@ public class RotationManager : MonoBehaviour
 {
     [Header("References")]
     public ControlManager controlManager;
-    public int id;
     public Transform level;
     public Transform player;
     public Transform cam;
@@ -34,7 +33,7 @@ public class RotationManager : MonoBehaviour
     }
 
     void Update() {
-        Dictionary<string, KeyCode> keys = controlManager.keyMap[id];
+        Dictionary<string, KeyCode> keys = controlManager.controlKeys;
         float currentAngle = level.eulerAngles.z;
 
         // Respond To Input
@@ -53,7 +52,7 @@ public class RotationManager : MonoBehaviour
             if (keyPressed != "") {
                 angleIndex += rotationDirection;
 
-                controlManager.UpdateKey(id, keyPressed); // Randomises the pressed key
+                controlManager.UpdateKey(keyPressed); // Randomises the pressed key
                 SetRotationCenter(); // Moves the rotation center to the player
 
                 state = RotationState.rotating;
