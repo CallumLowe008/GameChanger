@@ -13,7 +13,7 @@ public class RotationManager : MonoBehaviour
     [Header("Rotation")]
     private int angleIndex;
     private int targetAngle;
-    private float rotationDirection;
+    private int rotationDirection;
     public float rotationSpeed;
     public float minBuffer;
     public bool isRotating;
@@ -29,23 +29,26 @@ public class RotationManager : MonoBehaviour
 
         // Respond To Input
         if (isRotating == false) {
+            string keyPressed = "";
             if (Input.GetKeyDown(keys["right"])) {
-                angleIndex -= 1;
                 rotationDirection = -1;
-                isRotating = true;
+                keyPressed = "right";
 
-                controlManager.UpdateKey(id, "right");
-                SetRotationCenter(); // Moves the rotation center to the player
             }
             if (Input.GetKeyDown(keys["left"])) {
-                angleIndex += 1;
                 rotationDirection = 1;
-                isRotating = true;
-
-                controlManager.UpdateKey(id, "left");
-                SetRotationCenter();
+                keyPressed = "left";
             }
-            targetAngle = angleIndex * 90;
+
+            if (keyPressed != "") {
+                angleIndex += rotationDirection;
+                targetAngle = angleIndex * 90;
+
+                controlManager.UpdateKey(id, keyPressed); // Randomises the pressed key
+                SetRotationCenter(); // Moves the rotation center to the player
+
+                isRotating = true;
+            }
         }
 
         // Rotate Level
