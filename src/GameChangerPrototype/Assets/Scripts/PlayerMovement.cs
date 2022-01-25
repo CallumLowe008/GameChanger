@@ -37,7 +37,6 @@ public class PlayerMovement : MonoBehaviour
 
             if (Input.GetKeyUp(playerKeys["stop"])) {
                 stopper = 1;
-                controlManager.UpdateKey("stop");
             }
         }
 

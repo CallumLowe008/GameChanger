@@ -1,20 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System;
 using UnityEngine;
 
 public class ControlManager : MonoBehaviour
 {
-    public Sprite[] keyIcons;
     private string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
     public Dictionary<string, KeyCode> controlKeys = new Dictionary<string, KeyCode>();
     public Dictionary<string, SpriteRenderer> keyVisuals = new Dictionary<string, SpriteRenderer>();
 
+    [Header("Key Icons")]
+    public Sprite[] keyIcons;
+
     [Header("Temporary Key References")]
     public SpriteRenderer rightKey;
     public SpriteRenderer leftKey;
     public SpriteRenderer stopKey;
+
+    [Header("Key Press Indication")]
+    public Color baseTint;
+    public Color pressTint;
 
     void Start() {
         // Initial Keys
@@ -26,9 +31,13 @@ public class ControlManager : MonoBehaviour
         keyVisuals.Add("left", leftKey);
         keyVisuals.Add("stop", stopKey);
 
-        UpdateKeyVisual("right", controlKeys["right"].ToString());
-        UpdateKeyVisual("left", controlKeys["left"].ToString());
-        UpdateKeyVisual("stop", controlKeys["stop"].ToString());
+        ChangeKeyIcon("right");
+        ChangeKeyIcon("left");
+        ChangeKeyIcon("stop");
+    }
+
+    void Update() {
+        KeyPressIndication();
     }
 
     public List<KeyCode> GetKeysInUse() {
@@ -49,16 +58,33 @@ public class ControlManager : MonoBehaviour
         while (GetKeysInUse().Contains(key)); // Generates a random key repeatedly until it lands on one that is currently not in use
 
         controlKeys[keyName] = key; // Updates key dict
-        UpdateKeyVisual(keyName, key.ToString());
         return key;
     }
 
-    private void UpdateKeyVisual(string keyName, string keyValue) {
+    void ChangeKeyIcon(string keyName) {
+        string keyValue = controlKeys[keyName].ToString();
         if (keyValue != "") {
             keyVisuals[keyName].sprite = keyIcons[chars.IndexOf(keyValue)];
         }
         else {
             Debug.Log("Key not generated properly");
+        }
+    }
+
+    void KeyPressIndication() {
+        foreach (var keyData in controlKeys) {
+            if (Input.GetKey(keyData.Value)) {
+                keyVisuals[keyData.Key].color = pressTint;
+            }
+            else {
+                keyVisuals[keyData.Key].color = baseTint;
+            }
+
+            if (Input.GetKeyUp(keyData.Value)) {
+                UpdateKey(keyData.Key);
+                ChangeKeyIcon(keyData.Key);
+                break;
+            }
         }
     }
 }

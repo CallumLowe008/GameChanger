@@ -52,7 +52,6 @@ public class RotationManager : MonoBehaviour
             if (keyPressed != "") {
                 angleIndex += rotationDirection;
 
-                controlManager.UpdateKey(keyPressed); // Randomises the pressed key
                 SetRotationCenter(); // Moves the rotation center to the player
 
                 state = RotationState.rotating;
