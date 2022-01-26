@@ -479,11 +479,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7766004189785477294, guid: c3eeb7ef67e3e554f9421db1f6cd09dc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.8
+      value: 9.38
       objectReference: {fileID: 0}
     - target: {fileID: 7766004189785477294, guid: c3eeb7ef67e3e554f9421db1f6cd09dc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -9.26
+      value: -9.36
       objectReference: {fileID: 0}
     - target: {fileID: 7766004189785477294, guid: c3eeb7ef67e3e554f9421db1f6cd09dc, type: 3}
       propertyPath: m_LocalPosition.z
@@ -634,7 +634,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1048568678
 Transform:
   m_ObjectHideFlags: 0
@@ -659,7 +659,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
+  m_BackGroundColor: {r: 0.22846209, g: 0.23070797, b: 0.3207547, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -738,7 +738,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7766004189785477294, guid: c3eeb7ef67e3e554f9421db1f6cd09dc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9.2
+      value: -9.29
       objectReference: {fileID: 0}
     - target: {fileID: 7766004189785477294, guid: c3eeb7ef67e3e554f9421db1f6cd09dc, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1185,11 +1185,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7766004189785477294, guid: c3eeb7ef67e3e554f9421db1f6cd09dc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.6
+      value: 9.38
       objectReference: {fileID: 0}
     - target: {fileID: 7766004189785477294, guid: c3eeb7ef67e3e554f9421db1f6cd09dc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 9.340001
+      value: 9.07
       objectReference: {fileID: 0}
     - target: {fileID: 7766004189785477294, guid: c3eeb7ef67e3e554f9421db1f6cd09dc, type: 3}
       propertyPath: m_LocalPosition.z
