@@ -25,7 +25,7 @@ public class MovingPlatform : MonoBehaviour
     }
 
     void Start() {
-        transform.position = movementPoints[0];
+        transform.localPosition = movementPoints[0];
 
         movementComplete = false;
         targetIndex = 1;
@@ -37,11 +37,11 @@ public class MovingPlatform : MonoBehaviour
     void Update() {
         if (movementComplete == false) {
             if (isMoving) {
-                Vector3 positionDifference = movementPoints[targetIndex] - transform.position;
-                transform.position += positionDifference.normalized * movementSpeed * Time.deltaTime;
+                Vector3 positionDifference = movementPoints[targetIndex] - transform.localPosition;
+                transform.localPosition += positionDifference.normalized * movementSpeed * Time.deltaTime;
 
                 if (positionDifference.magnitude < lockDistance) {
-                    transform.position = movementPoints[targetIndex]; // Locks to the target position when it is close enough
+                    transform.localPosition = movementPoints[targetIndex]; // Locks to the target position when it is close enough
                     targetIndex += iterDirection;
                     if (targetIndex < 0 || targetIndex >= movementPoints.Length) {
                         targetIndex -= iterDirection;
