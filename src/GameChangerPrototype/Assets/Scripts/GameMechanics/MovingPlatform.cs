@@ -20,7 +20,7 @@ public class MovingPlatform : MonoBehaviour
         // Draws gizmo path when platform object is selected
         Gizmos.color = Color.magenta;
         for (var i = 0; i < movementPoints.Length-1; i += 1) {
-            Gizmos.DrawLine(movementPoints[i], movementPoints[i+1]);
+            Gizmos.DrawLine(transform.parent.TransformPoint(movementPoints[i]), transform.parent.TransformPoint(movementPoints[i+1]));
         }
     }
 

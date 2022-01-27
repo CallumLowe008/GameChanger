@@ -105,7 +105,6 @@ public class RotationManager : MonoBehaviour
     }
 
     void ResetPosition() {
-        return;
         level.position -= player.position;
         cam.position -= player.position;
         player.position -= player.position;
