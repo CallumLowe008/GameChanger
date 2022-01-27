@@ -1212,6 +1212,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MovingPlatform
       objectReference: {fileID: 0}
+    - target: {fileID: 7986276689754181237, guid: f714ec065b5657049a0d893792a5fd3e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7986276689754181238, guid: f714ec065b5657049a0d893792a5fd3e, type: 3}
       propertyPath: movementPoints.Array.size
       value: 2
@@ -1503,6 +1507,30 @@ PrefabInstance:
     - target: {fileID: 8536750246911819320, guid: 2391b91aecd1e884891d41ae4df75801, type: 3}
       propertyPath: jumpForce
       value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8536750246911819320, guid: 2391b91aecd1e884891d41ae4df75801, type: 3}
+      propertyPath: trajectoryDrawIterations
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8536750246911819320, guid: 2391b91aecd1e884891d41ae4df75801, type: 3}
+      propertyPath: trajectoryDrawIncrement
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8536750246911819320, guid: 2391b91aecd1e884891d41ae4df75801, type: 3}
+      propertyPath: playerMovement
+      value: 
+      objectReference: {fileID: 844523273}
+    - target: {fileID: 8536750246911819320, guid: 2391b91aecd1e884891d41ae4df75801, type: 3}
+      propertyPath: facing
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8536750246911819320, guid: 2391b91aecd1e884891d41ae4df75801, type: 3}
+      propertyPath: horizontalFacing
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8536750246911819320, guid: 2391b91aecd1e884891d41ae4df75801, type: 3}
+      propertyPath: verticalFacing
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 8536750246911819323, guid: 2391b91aecd1e884891d41ae4df75801, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1830,6 +1858,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 33ab8bf850df11244b13186ad6e0de54, type: 3}
+--- !u!114 &844523273 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9025259010621233702, guid: 3c3c689b0b8bf114c8af9c96901b3958, type: 3}
+  m_PrefabInstance: {fileID: 5871377946359819516}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ba887e33b5703c4ab46f34682e4e0ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &862053184 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1619009079628345082, guid: 33ab8bf850df11244b13186ad6e0de54, type: 3}
@@ -2882,6 +2921,30 @@ PrefabInstance:
       propertyPath: jumpForce
       value: 12
       objectReference: {fileID: 0}
+    - target: {fileID: 8536750246911819320, guid: 2391b91aecd1e884891d41ae4df75801, type: 3}
+      propertyPath: playerMovement
+      value: 
+      objectReference: {fileID: 844523273}
+    - target: {fileID: 8536750246911819320, guid: 2391b91aecd1e884891d41ae4df75801, type: 3}
+      propertyPath: trajectoryDrawIterations
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8536750246911819320, guid: 2391b91aecd1e884891d41ae4df75801, type: 3}
+      propertyPath: trajectoryDrawIncrement
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8536750246911819320, guid: 2391b91aecd1e884891d41ae4df75801, type: 3}
+      propertyPath: facing
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8536750246911819320, guid: 2391b91aecd1e884891d41ae4df75801, type: 3}
+      propertyPath: horizontalFacing
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8536750246911819320, guid: 2391b91aecd1e884891d41ae4df75801, type: 3}
+      propertyPath: verticalFacing
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8536750246911819323, guid: 2391b91aecd1e884891d41ae4df75801, type: 3}
       propertyPath: m_LocalPosition.x
       value: 14.69
@@ -3054,7 +3117,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5871377945194958472, guid: 3c3c689b0b8bf114c8af9c96901b3958, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -21.88
+      value: 8.47
       objectReference: {fileID: 0}
     - target: {fileID: 5871377945194958472, guid: 3c3c689b0b8bf114c8af9c96901b3958, type: 3}
       propertyPath: m_LocalPosition.y
