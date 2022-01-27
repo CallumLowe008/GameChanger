@@ -1534,7 +1534,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8536750246911819323, guid: 2391b91aecd1e884891d41ae4df75801, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8536750246911819323, guid: 2391b91aecd1e884891d41ae4df75801, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1902,13 +1902,14 @@ GameObject:
   m_Component:
   - component: {fileID: 1048568678}
   - component: {fileID: 1048568679}
+  - component: {fileID: 1048568680}
   m_Layer: 0
   m_Name: MinimapCam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1048568678
 Transform:
   m_ObjectHideFlags: 0
@@ -1950,7 +1951,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 25
+  orthographic size: 40.71
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -1966,6 +1967,19 @@ Camera:
   m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &1048568680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1048568677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d4159fb67ef6444cabef7963e22d825, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 1303379437}
 --- !u!4 &1077514121 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1619009079628345082, guid: 33ab8bf850df11244b13186ad6e0de54, type: 3}
@@ -2744,7 +2758,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8536750246911819323, guid: 2391b91aecd1e884891d41ae4df75801, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8536750246911819323, guid: 2391b91aecd1e884891d41ae4df75801, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
