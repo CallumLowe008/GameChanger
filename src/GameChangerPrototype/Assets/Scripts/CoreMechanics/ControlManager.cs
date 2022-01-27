@@ -49,7 +49,6 @@ public class ControlManager : MonoBehaviour
     }
 
     public KeyCode UpdateKey(string keyName) {
-        return KeyCode.None;
         KeyCode key = new KeyCode();
         System.Random rand = new System.Random(); // Creates random generator
         do {
