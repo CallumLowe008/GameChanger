@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 57312377398343576}
   m_Layer: 0
   m_Name: KeyDoor_Door
-  m_TagString: KeyDoor_RED
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

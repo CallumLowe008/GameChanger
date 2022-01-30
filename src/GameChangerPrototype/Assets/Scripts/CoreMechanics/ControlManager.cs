@@ -9,6 +9,9 @@ public class ControlManager : MonoBehaviour
     public Dictionary<string, KeyCode> controlKeys = new Dictionary<string, KeyCode>();
     public Dictionary<string, SpriteRenderer> keyVisuals = new Dictionary<string, SpriteRenderer>();
 
+    [Header("General")]
+    public bool disableKeyChanges;
+
     [Header("Key Icons")]
     public Sprite[] keyIcons;
 
@@ -49,6 +52,11 @@ public class ControlManager : MonoBehaviour
     }
 
     public KeyCode UpdateKey(string keyName) {
+
+        if (disableKeyChanges == true) {
+            return KeyCode.None;
+        }
+
         KeyCode key = new KeyCode();
         System.Random rand = new System.Random(); // Creates random generator
         do {
