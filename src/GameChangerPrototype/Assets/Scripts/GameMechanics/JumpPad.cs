@@ -8,12 +8,10 @@ public class JumpPad : MonoBehaviour
 
     [Header("Trajectory Plotting")]
     public PlayerMovement playerMovement;
-    public int horizontalFacing;
-    public int verticalFacing;
     public float trajectoryDrawIterations;
     public float trajectoryDrawIncrement;
 
-    void OnDrawGizmos() {
+    void OnDrawGizmosSelected() {
 
         if (trajectoryDrawIterations <= 0 || trajectoryDrawIncrement <= 0 || playerMovement == null) {
             return;
@@ -22,21 +20,30 @@ public class JumpPad : MonoBehaviour
         Vector3 playerHeight = Vector3.up * playerMovement.transform.localScale.y/2;
 
         // Calculate Velocity
-        Vector2 velocity = (Vector2.right*horizontalFacing*playerMovement.moveSpeed) + (Vector2.up*verticalFacing*jumpForce);
+        Vector2 vel = (Vector2.right*playerMovement.moveSpeed) + (Vector2.up*jumpForce);
+        Vector3 velocity = new Vector3(vel.x, vel.y, 0);
 
         // Draw Line
         Gizmos.color = Color.green;
         for (float i = 0; i < (trajectoryDrawIterations-trajectoryDrawIncrement); i += trajectoryDrawIncrement) {
             Gizmos.DrawLine(
                 PlotTrajectoryAtTime(transform.position, velocity, i) + playerHeight, 
-                PlotTrajectoryAtTime(transform.position, velocity, i += trajectoryDrawIncrement) + playerHeight
+                PlotTrajectoryAtTime(transform.position, velocity, i + trajectoryDrawIncrement) + playerHeight
             );
         }
     }
 
-    Vector3 PlotTrajectoryAtTime(Vector3 startPos3, Vector2 velocity, float time) {
-        Vector2 startPos = new Vector2(startPos3.x, startPos3.y);
-        return startPos + (velocity*time) + (Physics2D.gravity*time*time*0.5f*verticalFacing);
+    Vector3 PlotTrajectoryAtTime(Vector3 startPos, Vector3 velocity, float time) {
+        startPos += (velocity*time) + (Physics.gravity*time*time*0.5f);
+        startPos = RotateAroundPoint(startPos, transform.position, transform.eulerAngles);
+        return startPos;
+    }
+
+    Vector3 RotateAroundPoint(Vector3 pos, Vector3 pivot, Vector3 angles) {
+        Vector3 dir = pos - pivot;
+        dir = Quaternion.Euler(angles) * dir;
+        pos = dir + pivot;
+        return pos;
     }
 
     void OnCollisionEnter2D(Collision2D col) {

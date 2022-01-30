@@ -145,3 +145,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpForce: 5
+  playerMovement: {fileID: 0}
+  trajectoryDrawIterations: 3
+  trajectoryDrawIncrement: 0.4
