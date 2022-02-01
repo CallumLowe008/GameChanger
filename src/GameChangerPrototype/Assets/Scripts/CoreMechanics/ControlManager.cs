@@ -10,6 +10,7 @@ public class ControlManager : MonoBehaviour
     public Dictionary<string, SpriteRenderer> keyVisuals = new Dictionary<string, SpriteRenderer>();
 
     [Header("General")]
+    public RotationManager rotationManager;
     public bool disableKeyChanges;
 
     [Header("Key Icons")]
@@ -52,7 +53,6 @@ public class ControlManager : MonoBehaviour
     }
 
     public KeyCode UpdateKey(string keyName) {
-
         if (disableKeyChanges == true) {
             return KeyCode.None;
         }
