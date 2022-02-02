@@ -15,10 +15,15 @@ public class PlayerMovement : MonoBehaviour
     public int stopper;
     public Vector2 storedVelocity;
 
+    [Header("Respawn")]
+    private Vector3 startPos;
+
     void Start() {
         direction = 1;
         stopper = 1;
         storedVelocity = Vector3.zero;
+
+        startPos = transform.position - rotationManager.levelCenter.localPosition;
     }
 
     void Update() {
@@ -51,5 +56,16 @@ public class PlayerMovement : MonoBehaviour
         }
 
         body.position += new Vector2(moveSpeed * direction, 0) * Time.deltaTime * stopper;
+    }
+
+    Vector3 RotateAroundPoint(Vector3 pos, Vector3 pivot, Vector3 angles) {
+        Vector3 dir = pos - pivot;
+        dir = Quaternion.Euler(angles) * dir;
+        pos = dir + pivot;
+        return pos;
+    }
+
+    public void Die() {
+        transform.position = rotationManager.levelCenter.TransformPoint(startPos);
     }
 }

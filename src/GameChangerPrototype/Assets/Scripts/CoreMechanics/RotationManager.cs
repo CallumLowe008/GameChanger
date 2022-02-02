@@ -7,6 +7,7 @@ public class RotationManager : MonoBehaviour
     [Header("References")]
     public ControlManager controlManager;
     public Transform level;
+    public Transform levelCenter;
     public Transform player;
     public Transform cam;
 
