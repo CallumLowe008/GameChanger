@@ -34,6 +34,12 @@ public class ControlManager : MonoBehaviour
         keyVisuals.Add("left", leftKey);
         keyVisuals.Add("stop", stopKey);
 
+        if (disableKeyChanges == false) {
+            UpdateKey("right");
+            UpdateKey("left");
+            UpdateKey("stop");
+        }
+
         ChangeKeyIcon("right");
         ChangeKeyIcon("left");
         ChangeKeyIcon("stop");
@@ -56,13 +62,19 @@ public class ControlManager : MonoBehaviour
             return KeyCode.None;
         }
 
+        List<KeyCode> keysInUse = GetKeysInUse();
+        foreach (ControlManager cm in FindObjectsOfType<ControlManager>()) {
+            foreach (KeyCode oKey in cm.GetKeysInUse()) {
+                keysInUse.Add(oKey);
+            }
+        }
+
         KeyCode key = new KeyCode();
-        System.Random rand = new System.Random(); // Creates random generator
         do {
-            int index = rand.Next(0, chars.Length); // Random.Next() generates a random number between the two arguments
+            int index = Random.Range(0, chars.Length); // Random.Next() generates a random number between the two arguments
             key = (KeyCode)System.Enum.Parse(typeof(KeyCode), chars[index].ToString()); // Converts char to string, and string to KeyCode
         }
-        while (GetKeysInUse().Contains(key)); // Generates a random key repeatedly until it lands on one that is currently not in use
+        while (keysInUse.Contains(key)); // Generates a random key repeatedly until it lands on one that is currently not in use
 
         controlKeys[keyName] = key; // Updates key dict
         return key;

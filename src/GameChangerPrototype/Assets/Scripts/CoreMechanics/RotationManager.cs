@@ -21,6 +21,9 @@ public class RotationManager : MonoBehaviour
     private int angleIndex;
     private int rotationDirection;
 
+    [Header("Other")]
+    private Vector3 startPos;
+
     public enum RotationState {
         stationary,
         rotating,
@@ -31,6 +34,7 @@ public class RotationManager : MonoBehaviour
     void Start() {
         state = RotationState.stationary;
         rotationDirection = 1;
+        startPos = transform.position;
     }
 
     void Update() {
@@ -106,8 +110,8 @@ public class RotationManager : MonoBehaviour
     }
 
     void ResetPosition() {
-        level.position -= player.position;
-        cam.position -= player.position;
-        player.position -= player.position;
+        level.position -= player.position - startPos;
+        cam.position -= player.position - startPos;
+        player.position -= player.position - startPos;
     }
 }
